@@ -173,9 +173,6 @@ class _LoginFormState extends State<LoginForm> {
                 width: 400,
                 child: OmegaFormField(
                   label: const Text("Подсказка"),
-                  // decoration: const InputDecoration(
-                  //   label: Text("Подсказка"),
-                  // ),
                   validator: (value) {
                     if (!(value == null || value.isEmpty)) {
                       return 'Please enter some text';

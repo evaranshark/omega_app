@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
@@ -17,7 +15,7 @@ class MainApp extends StatelessWidget {
     var themeDataBase = ThemeData.light().copyWith(
       textTheme: ThemeData.light().textTheme.copyWith(
           labelSmall: GoogleFonts.rubik(
-            fontSize: Platform.isWindows ? 18 : 13,
+            fontSize: 18,
             fontWeight: FontWeight.w300,
             letterSpacing: 0.5,
           ),

@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:omega_app/constants.dart';
+import 'package:omega_app/omega_form_field.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,10 +14,25 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var themeDataBase = ThemeData.light();
+    var themeDataBase = ThemeData.light().copyWith(
+      textTheme: ThemeData.light().textTheme.copyWith(
+          labelSmall: GoogleFonts.rubik(
+            fontSize: Platform.isWindows ? 18 : 13,
+            fontWeight: FontWeight.w300,
+            letterSpacing: 0.5,
+          ),
+          titleMedium: GoogleFonts.rubik(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 0.5,
+          )),
+    );
     return MaterialApp(
       restorationScopeId: "Omega app",
       theme: themeDataBase.copyWith(
+        colorScheme: const ColorScheme.light(
+          primary: Color.fromARGB(255, 170, 158, 255),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith((states) {
@@ -30,7 +49,7 @@ class MainApp extends StatelessWidget {
             }),
             foregroundColor: MaterialStateColor.resolveWith((states) {
               return states.contains(MaterialState.disabled)
-                  ? const Color.fromARGB(255, 125, 110, 233)
+                  ? AppColors.violetHard
                   : Colors.white;
             }),
             shadowColor:
@@ -52,29 +71,128 @@ class MainApp extends StatelessWidget {
             visualDensity: VisualDensity.standard,
           ),
         ),
+        inputDecorationTheme: InputDecorationTheme(
+            border: MaterialStateOutlineInputBorder.resolveWith((states) {
+          var activeStates = [
+            MaterialState.hovered,
+            MaterialState.focused,
+            MaterialState.selected,
+            MaterialState.pressed
+          ];
+          InputBorder getBorder(Color color) {
+            return OutlineInputBorder(
+              borderSide: BorderSide(
+                color: color,
+                width: 2.0,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            );
+          }
+
+          if (activeStates.any(states.contains)) {
+            return getBorder(AppColors.violetHard);
+          }
+          if (states.contains(MaterialState.error)) {
+            return getBorder(AppColors.errorColor);
+          }
+          return getBorder(AppColors.violetLight);
+        }), labelStyle: MaterialStateTextStyle.resolveWith((states) {
+          if (states.contains(MaterialState.hovered)) {
+            return GoogleFonts.rubik(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              letterSpacing: 1.03,
+              color: AppColors.textP,
+            );
+          }
+          return GoogleFonts.rubik(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 1.03,
+            color: AppColors.violetLight,
+          );
+        }), floatingLabelStyle: MaterialStateTextStyle.resolveWith((states) {
+          if (states.contains(MaterialState.error)) {
+            return themeDataBase.textTheme.labelSmall!.copyWith(
+              color: AppColors.textLight,
+            );
+          }
+          return themeDataBase.textTheme.labelSmall!.copyWith(
+            color: AppColors.violetLight,
+          );
+        })),
       ),
       home: const LoginForm(),
     );
   }
 }
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     super.key,
   });
 
-  void onPressed() {}
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  void onPressed() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+    }
+  }
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Align(
         alignment: Alignment.center,
-        child: ElevatedButton(
-            onPressed: onPressed,
-            child: const Text(
-              "Кнопка",
-            )),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 400,
+                child: OmegaFormField(
+                  textColor: MaterialStateColor.resolveWith((states) {
+                    if (states.contains(MaterialState.error)) {
+                      return Colors.red;
+                    }
+                    return Colors.black;
+                  }),
+                  style: GoogleFonts.rubik(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.5,
+                  ),
+                  decoration: const InputDecoration(
+                    label: Text("Подсказка"),
+                  ),
+                  validator: (value) {
+                    if (!(value == null || value.isEmpty)) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: onPressed,
+                  child: const Text(
+                    "Кнопка",
+                  )),
+            ],
+          ),
+        ),
       ),
     );
   }

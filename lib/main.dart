@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
+import 'package:omega_app/login_form.dart';
 import 'package:omega_app/omega_form_field.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       restorationScopeId: "Omega app",
       theme: themeDataBase.copyWith(
+        scaffoldBackgroundColor: Colors.blueGrey,
         colorScheme: const ColorScheme.light(
           primary: Color.fromARGB(255, 170, 158, 255),
         ),
@@ -122,76 +124,29 @@ class MainApp extends StatelessWidget {
           );
         })),
       ),
-      home: const LoginForm(),
+      home: const LoginPage(),
     );
   }
 }
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({
+class LoginPage extends StatelessWidget {
+  const LoginPage({
     super.key,
   });
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
-  void onPressed() {
-    if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
-      );
-    }
-  }
-
-  final _formKey = GlobalKey<FormState>();
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Align(
-        alignment: Alignment.center,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 400,
-                child: OmegaFormField(
-                  textColor: MaterialStateColor.resolveWith((states) {
-                    if (states.contains(MaterialState.error)) {
-                      return Colors.red;
-                    }
-                    return Colors.black;
-                  }),
-                  style: GoogleFonts.rubik(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 0.5,
-                  ),
-                  decoration: const InputDecoration(
-                    label: Text("Подсказка"),
-                  ),
-                  validator: (value) {
-                    if (!(value == null || value.isEmpty)) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                  onPressed: onPressed,
-                  child: const Text(
-                    "Кнопка",
-                  )),
-            ],
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.fitHeight,
           ),
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: LoginForm(),
         ),
       ),
     );

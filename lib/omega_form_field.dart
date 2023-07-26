@@ -30,9 +30,10 @@ class _OmegaFormFieldState extends State<OmegaFormField>
       decoration: widget.decoration,
       validator: (value) {
         var result = widget.validator?.call(value);
-        if (result != null)
+        if (result != null) {
           updateMaterialState(MaterialState.error,
               onChanged: (value) => setState(() {}));
+        }
         return result;
       },
     );

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
@@ -18,7 +16,7 @@ class MainApp extends StatelessWidget {
     var themeDataBase = ThemeData.light().copyWith(
       textTheme: ThemeData.light().textTheme.copyWith(
           labelSmall: GoogleFonts.rubik(
-            fontSize: Platform.isWindows ? 18 : 13,
+            fontSize: 18,
             fontWeight: FontWeight.w300,
             letterSpacing: 0.5,
           ),
@@ -91,12 +89,16 @@ class MainApp extends StatelessWidget {
             );
           }
 
-          if (activeStates.any(states.contains)) {
+          if (states.contains(MaterialState.focused)) {
             return getBorder(AppColors.violetHard);
           }
           if (states.contains(MaterialState.error)) {
             return getBorder(AppColors.errorColor);
           }
+          if (activeStates.any(states.contains)) {
+            return getBorder(AppColors.violetHard);
+          }
+
           return getBorder(AppColors.violetLight);
         }), labelStyle: MaterialStateTextStyle.resolveWith((states) {
           if (states.contains(MaterialState.hovered)) {
@@ -114,9 +116,19 @@ class MainApp extends StatelessWidget {
             color: AppColors.violetLight,
           );
         }), floatingLabelStyle: MaterialStateTextStyle.resolveWith((states) {
+          if (states.contains(MaterialState.focused)) {
+            return themeDataBase.textTheme.labelSmall!.copyWith(
+              color: AppColors.violetLight,
+            );
+          }
           if (states.contains(MaterialState.error)) {
             return themeDataBase.textTheme.labelSmall!.copyWith(
               color: AppColors.textLight,
+            );
+          }
+          if (states.contains(MaterialState.hovered)) {
+            return themeDataBase.textTheme.labelSmall!.copyWith(
+              color: AppColors.violetLight,
             );
           }
           return themeDataBase.textTheme.labelSmall!.copyWith(

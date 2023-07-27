@@ -7,6 +7,7 @@ class OmegaFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final MaterialStateColor? textColor;
   final Widget? label;
+  final bool obscureText;
 
   final void Function(String?)? onChanged;
 
@@ -20,6 +21,7 @@ class OmegaFormField extends StatefulWidget {
     this.controller,
     this.onChanged,
     this.label,
+    this.obscureText = false,
   });
 
   static final MaterialStateColor _defaultTextColor =
@@ -60,6 +62,7 @@ class _OmegaFormFieldState extends State<OmegaFormField>
       onFocusChange: updateMaterialState(MaterialState.hovered),
       onHover: updateMaterialState(MaterialState.hovered),
       child: TextFormField(
+        obscureText: widget.obscureText,
         style:
             (widget.style ?? Theme.of(context).textTheme.titleMedium!).copyWith(
           color: (widget.textColor ?? OmegaFormField._defaultTextColor)

@@ -30,6 +30,8 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController(),
+      passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +95,7 @@ class _LoginFormState extends State<LoginForm> {
                       height: 25,
                     ),
                     OmegaFormField(
+                      controller: emailController,
                       decoration: const InputDecoration(
                         label: Text("E-mail"),
                       ),
@@ -107,6 +110,8 @@ class _LoginFormState extends State<LoginForm> {
                       height: 20,
                     ),
                     OmegaFormField(
+                      controller: passwordController,
+                      obscureText: true,
                       decoration: const InputDecoration(
                         label: Text("Пароль"),
                       ),

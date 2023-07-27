@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,8 +16,17 @@ import 'widgets/link_text.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm(
-      {super.key, this.onForgotPassword, this.onRegister, this.onLogin});
-  final VoidCallback? onForgotPassword, onRegister, onLogin;
+      {super.key,
+      this.onForgotPassword,
+      this.onRegister,
+      this.onLogin,
+      this.onLoginSuccess,
+      this.onLoginFailed});
+  final VoidCallback? onForgotPassword,
+      onRegister,
+      onLogin,
+      onLoginSuccess,
+      onLoginFailed;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -107,8 +117,11 @@ class _LoginFormState extends State<LoginForm> {
                         label: Text("E-mail"),
                       ),
                       validator: (value) {
-                        if (!(value == null || value.isEmpty)) {
-                          return 'Please enter some text';
+                        if (value == null || value.isEmpty) {
+                          return "Пожалуйста, введите E-mail";
+                        }
+                        if (!EmailValidator.validate(value)) {
+                          return " Некорректный e-mail";
                         }
                         return null;
                       },
@@ -123,8 +136,8 @@ class _LoginFormState extends State<LoginForm> {
                         label: Text("Пароль"),
                       ),
                       validator: (value) {
-                        if (!(value == null || value.isEmpty)) {
-                          return 'Please enter some text';
+                        if ((value == null || value.isEmpty)) {
+                          return 'Пожалуйста, введите пароль';
                         }
                         return null;
                       },

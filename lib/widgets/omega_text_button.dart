@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class OmegaTextButton extends StatelessWidget {
   final Widget child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   const OmegaTextButton._({
     super.key,
     required this.underlined,
-    required this.onPressed,
+    this.onPressed,
     required this.child,
   });
 

@@ -8,10 +8,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
 import 'package:omega_app/helpers.dart';
-import 'package:omega_app/omega_text_button.dart';
+import 'package:omega_app/widgets/omega_text_button.dart';
 import 'package:omega_app/themes.dart';
 
-import 'omega_form_field.dart';
+import 'widgets/omega_form_field.dart';
 import 'widgets/link_text.dart';
 
 class LoginForm extends StatefulWidget {
@@ -214,10 +214,13 @@ class _LoginFormState extends State<LoginForm> {
                       child: Text.rich(
                         TextSpan(text: "Ещё нет аккаунта? ", children: [
                           WidgetSpan(
-                              child: LinkText(
-                            text: "Зарегистрируйтесь",
-                            onPressed: () {},
-                          )),
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              // Alternatively we can use [LinkText] widget as a child
+                              child: OmegaTextButton(
+                                child: const Text("Зарегистрируйтесь"),
+                                onPressed: widget.onRegister ?? () {},
+                              )),
                         ]),
                       ),
                     ),

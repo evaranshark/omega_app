@@ -8,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
 import 'package:omega_app/helpers.dart';
 import 'package:omega_app/omega_text_button.dart';
+import 'package:omega_app/themes.dart';
 
 import 'omega_form_field.dart';
+import 'widgets/link_text.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -179,6 +181,20 @@ class _LoginFormState extends State<LoginForm> {
                           child: Image.asset(Assets.vkColoredPng),
                         ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Text.rich(
+                        TextSpan(text: "Ещё нет аккаунта? ", children: [
+                          WidgetSpan(
+                              child: LinkText(
+                            text: "Зарегистрируйтесь",
+                            onPressed: () {},
+                          )),
+                        ]),
+                      ),
                     ),
                   ],
                 ),

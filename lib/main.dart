@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
 import 'package:omega_app/login_form.dart';
 import 'package:omega_app/omega_form_field.dart';
+import 'package:omega_app/themes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -157,6 +158,9 @@ class MainApp extends StatelessWidget {
             }),
           ),
         ),
+        extensions: [
+          Theming.defaulteLinkStyle,
+        ],
       ),
       home: const LoginPage(),
     );

@@ -15,21 +15,29 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var themeDataBase = ThemeData.light().copyWith(
       textTheme: ThemeData.light().textTheme.copyWith(
-          labelSmall: GoogleFonts.rubik(
-            fontSize: 18,
-            fontWeight: FontWeight.w300,
-            letterSpacing: 0.5,
+            labelSmall: GoogleFonts.rubik(
+              fontSize: 18,
+              fontWeight: FontWeight.w300,
+              letterSpacing: 0.5,
+            ),
+            titleMedium: GoogleFonts.rubik(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              letterSpacing: 0.5,
+            ),
+            displayMedium: GoogleFonts.rubik(
+              fontWeight: FontWeight.w700,
+            ),
+            bodyMedium: GoogleFonts.rubik(
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+              color: AppColors.textP,
+            ),
           ),
-          titleMedium: GoogleFonts.rubik(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            letterSpacing: 0.5,
-          )),
     );
     return MaterialApp(
       restorationScopeId: "Omega app",
       theme: themeDataBase.copyWith(
-        scaffoldBackgroundColor: Colors.blueGrey,
         colorScheme: const ColorScheme.light(
           primary: Color.fromARGB(255, 170, 158, 255),
         ),
@@ -135,6 +143,20 @@ class MainApp extends StatelessWidget {
             color: AppColors.violetLight,
           );
         })),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateColor.resolveWith((states) {
+              if (states.contains(MaterialState.disabled)) {
+                return AppColors.textP;
+              }
+              if (states.contains(MaterialState.hovered) ||
+                  states.contains(MaterialState.focused)) {
+                return AppColors.linkHover;
+              }
+              return AppColors.link;
+            }),
+          ),
+        ),
       ),
       home: const LoginPage(),
     );
@@ -149,17 +171,32 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.fitHeight,
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: const DecoratedBox(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/background.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
-        ),
-        child: Align(
-          alignment: Alignment.center,
-          child: LoginForm(),
-        ),
+          const Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: LoginForm(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

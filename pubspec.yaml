@@ -4,11 +4,12 @@ publish_to: 'none'
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=3.0.3'
 
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.7
   google_fonts: ^4.0.4
   pixel_snap: ^0.1.1
 
@@ -22,3 +23,8 @@ flutter:
 
   assets:
     - assets/images/background.png
+    - assets/images/icon_google_color.svg
+    - assets/images/icon_vk_color.svg
+    - assets/images/icon_yandex_color.svg
+    - assets/images/icon_yandex_color.png
+    - assets/images/icon_vk_color.png

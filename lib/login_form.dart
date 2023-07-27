@@ -14,7 +14,9 @@ import 'omega_form_field.dart';
 import 'widgets/link_text.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+  const LoginForm(
+      {super.key, this.onForgotPassword, this.onRegister, this.onLogin});
+  final VoidCallback? onForgotPassword, onRegister, onLogin;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -23,15 +25,20 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   void onPressed() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
-      );
+      widget.onLogin?.call();
     }
   }
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController(),
       passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +135,7 @@ class _LoginFormState extends State<LoginForm> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: OmegaTextButton.underlined(
-                        onPressed: () {},
+                        onPressed: widget.onForgotPassword ?? () {},
                         child: const Text("Забыли пароль?"),
                       ),
                     ),

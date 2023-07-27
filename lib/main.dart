@@ -189,14 +189,18 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          const Scaffold(
+          Scaffold(
             backgroundColor: Colors.transparent,
             body: Align(
               alignment: Alignment.center,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: LoginForm(),
+                  child: LoginForm(
+                    onLogin: () => ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("login actions")),
+                    ),
+                  ),
                 ),
               ),
             ),

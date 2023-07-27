@@ -48,7 +48,7 @@ class LinkTextStyle extends ThemeExtension<LinkTextStyle> {
 }
 
 abstract class Theming {
-  static LinkTextStyle defaulteLinkStyle = LinkTextStyle(
+  static LinkTextStyle defaultLinkStyle = LinkTextStyle(
     materialStyle: MaterialStateTextStyle.resolveWith((states) {
       return GoogleFonts.rubik(
         fontSize: 16,

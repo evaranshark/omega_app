@@ -7,32 +7,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:omega_app/constants.dart';
 import 'package:omega_app/helpers.dart';
+import 'package:omega_app/repository/login_repo.dart';
 import 'package:omega_app/widgets/omega_text_button.dart';
 
 import 'widgets/link_text.dart';
 import 'widgets/omega_form_field.dart';
 
 class LoginForm extends StatefulWidget {
-  const LoginForm(
-      {super.key,
-      this.onForgotPassword,
-      this.onRegister,
-      this.onLogin,
-      this.onLoginSuccess,
-      this.onLoginFailed});
-  final VoidCallback? onForgotPassword,
-      onRegister,
-      onLogin,
-      onLoginSuccess,
-      onLoginFailed;
+  const LoginForm({
+    super.key,
+    this.onForgotPassword,
+    this.onRegister,
+    this.onLogin,
+  });
+  final VoidCallback? onForgotPassword, onRegister, onLogin;
 
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
-  void onPressed() {
+  final repo = LoginRepository();
+  void onPressed() async {
     if (_formKey.currentState!.validate()) {
+      bool logged = await repo.login(LoginData(
+        emailController.text,
+        passwordController.text,
+      ));
       widget.onLogin?.call();
     }
   }

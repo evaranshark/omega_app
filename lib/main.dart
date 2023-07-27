@@ -4,6 +4,8 @@ import 'package:omega_app/constants.dart';
 import 'package:omega_app/login_form.dart';
 import 'package:omega_app/themes.dart';
 
+import 'screens/login_screen.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -158,55 +160,10 @@ class MainApp extends StatelessWidget {
           ),
         ),
         extensions: [
-          Theming.defaulteLinkStyle,
+          Theming.defaultLinkStyle,
         ],
       ),
-      home: const LoginPage(),
-    );
-  }
-}
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/background.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Align(
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: LoginForm(
-                    onLogin: () => ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("login actions")),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      home: const LoginScreen(),
     );
   }
 }

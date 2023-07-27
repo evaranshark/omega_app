@@ -5,14 +5,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:omega_app/constants.dart';
 import 'package:omega_app/helpers.dart';
 import 'package:omega_app/widgets/omega_text_button.dart';
-import 'package:omega_app/themes.dart';
 
 import 'widgets/omega_form_field.dart';
-import 'widgets/link_text.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm(
@@ -167,46 +164,7 @@ class _LoginFormState extends State<LoginForm> {
                     const SizedBox(
                       height: 25,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            //foregroundColor: Colors.transparent,
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.all(14),
-                          ),
-                          onPressed: () {},
-                          child: Image.asset(Assets.yColoredPng),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            //foregroundColor: Colors.transparent,
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.all(14),
-                          ),
-                          onPressed: () {},
-                          child: SvgPicture.asset(
-                            Assets.gColored,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            //foregroundColor: Colors.transparent,
-                            backgroundColor: Colors.white,
-                            padding: const EdgeInsets.all(14),
-                          ),
-                          onPressed: () {},
-                          child: Image.asset(Assets.vkColoredPng),
-                        ),
-                      ],
-                    ),
+                    const SocialLoginRow(),
                     const SizedBox(
                       height: 20,
                     ),
@@ -218,8 +176,8 @@ class _LoginFormState extends State<LoginForm> {
                               baseline: TextBaseline.alphabetic,
                               // Alternatively we can use [LinkText] widget as a child
                               child: OmegaTextButton(
-                                child: const Text("Зарегистрируйтесь"),
                                 onPressed: widget.onRegister ?? () {},
+                                child: const Text("Зарегистрируйтесь"),
                               )),
                         ]),
                       ),
@@ -249,10 +207,55 @@ class _LoginFormState extends State<LoginForm> {
   }
 }
 
-class _LoginFormDivider extends StatelessWidget {
-  const _LoginFormDivider({
+class SocialLoginRow extends StatelessWidget {
+  const SocialLoginRow({
     super.key,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            padding: const EdgeInsets.all(14),
+          ),
+          onPressed: () {},
+          child: Image.asset(Assets.yColoredPng),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            padding: const EdgeInsets.all(14),
+          ),
+          onPressed: () {},
+          child: SvgPicture.asset(
+            Assets.gColored,
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            padding: const EdgeInsets.all(14),
+          ),
+          onPressed: () {},
+          child: Image.asset(Assets.vkColoredPng),
+        ),
+      ],
+    );
+  }
+}
+
+class _LoginFormDivider extends StatelessWidget {
+  const _LoginFormDivider();
 
   @override
   Widget build(BuildContext context) {

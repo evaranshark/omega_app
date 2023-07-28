@@ -34,6 +34,13 @@ class _LoginFormState extends State<LoginForm> {
         emailController.text,
         passwordController.text,
       ));
+      if (logged) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Login success")));
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Login failed")));
+      }
       widget.onLogin?.call();
     }
   }

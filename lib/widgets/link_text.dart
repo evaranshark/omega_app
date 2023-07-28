@@ -26,7 +26,7 @@ class _LinkTextState extends State<LinkText> with MaterialStateMixin {
         widget.text,
         style: Theme.of(context)
             .extension<LinkTextStyle>()!
-            .materialStyle
+            .textStyle
             .resolve(materialStates),
         // style: Theme.of(context).extension<LinkTextStyle>()!.style.copyWith(
         //     color: Theme.of(context)

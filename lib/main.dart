@@ -161,6 +161,7 @@ class MainApp extends StatelessWidget {
         ),
         extensions: [
           Theming.defaultLinkStyle,
+          Theming.defaultMainButtonStyle,
         ],
       ),
       home: const LoginScreen(),

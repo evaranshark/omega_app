@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 final class LoginRepository {
   static const String _host = "158.160.14.209";
@@ -23,7 +22,11 @@ final class LoginRepository {
     var response = await dio.postUri(_loginUri, data: {
       'login': data.email,
       'password': data.password,
-    });
+    }, options: Options(
+      validateStatus: (status) {
+        return status != null && status < 500;
+      },
+    ));
     if (response.statusCode == 200) {
       //Here we can save tokens
       return true;

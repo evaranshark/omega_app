@@ -31,3 +31,7 @@ flutter:
     - assets/images/icon_yandex_color.svg
     - assets/images/icon_yandex_color.png
     - assets/images/icon_vk_color.png
+    - assets/images/logo.svg
+    - assets/images/login.svg
+    - assets/images/cart.svg
+    - assets/images/favorite.svg

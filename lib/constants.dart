@@ -18,4 +18,8 @@ abstract class Assets {
   static const gColored = "assets/images/icon_google_color.svg";
   static const vkColoredPng = "assets/images/icon_vk_color.png";
   static const yColoredPng = "assets/images/icon_yandex_color.png";
+  static const logo = "assets/images/logo.svg";
+  static const login = "assets/images/login.svg";
+  static const cart = "assets/images/cart.svg";
+  static const favorite = "assets/images/favorite.svg";
 }

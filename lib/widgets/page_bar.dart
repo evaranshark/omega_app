@@ -141,16 +141,19 @@ class _PageItemState extends State<_PageItem> with MaterialStateMixin {
       },
       onHover: (value) => statesController.update(MaterialState.hovered, value),
       hoverColor: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(
-          border: theme.border.resolve(materialStates),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(bottom: isSelected ? 4 : 0),
-          child: Text(
-            widget.item.text,
-            textAlign: TextAlign.center,
-            style: theme.textStyle.resolve(materialStates),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            border: theme.border.resolve(materialStates),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: isSelected ? 4 : 0),
+            child: Text(
+              widget.item.text,
+              textAlign: TextAlign.center,
+              style: theme.textStyle.resolve(materialStates),
+            ),
           ),
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:omega_app/constants.dart';
 import 'package:omega_app/widgets/page_bar.dart';
 
 import '../login_form.dart';
@@ -21,14 +23,24 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           SliverAppBar(
+            toolbarHeight: 0,
             backgroundColor: Colors.white,
             pinned: true,
             collapsedHeight: 80,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+            flexibleSpace: Center(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SvgPicture.asset(Assets.logo),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: PageBar(
                       pages: [
                         PageItem(text: "Игры"),
@@ -43,6 +55,33 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        maxWidth: 320,
+                      ),
+                      child: const TextField(),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      OmegaIconButton(
+                        icon: SvgPicture.asset(Assets.cart),
+                      ),
+                      OmegaIconButton(
+                        icon: SvgPicture.asset(Assets.favorite),
+                      ),
+                      OmegaIconButton(
+                        icon: SvgPicture.asset(Assets.login),
+                        label: const Text("Вход"),
+                      ),
+                    ],
+                  ),
+                  const Spacer(
+                    flex: 2,
+                  ),
                 ],
               ),
             ),
@@ -61,6 +100,43 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class OmegaIconButton extends StatelessWidget {
+  final Widget icon;
+  final Widget? label;
+  const OmegaIconButton({
+    super.key,
+    required this.icon,
+    this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(7.5),
+          child: (label == null)
+              ? icon
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    icon,
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    label!,
+                  ],
+                ),
+        ),
       ),
     );
   }

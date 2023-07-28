@@ -30,14 +30,16 @@ extension TextStyleX on TextStyle {
 }
 
 class LinkTextStyle extends ThemeExtension<LinkTextStyle> {
-  MaterialStateTextStyle materialStyle;
+  MaterialStateTextStyle textStyle;
   LinkTextStyle({
-    required this.materialStyle,
+    required this.textStyle,
   });
 
   @override
-  ThemeExtension<LinkTextStyle> copyWith() {
-    return this;
+  LinkTextStyle copyWith({MaterialStateTextStyle? textStyle}) {
+    return LinkTextStyle(
+      textStyle: textStyle ?? this.textStyle,
+    );
   }
 
   @override
@@ -49,7 +51,7 @@ class LinkTextStyle extends ThemeExtension<LinkTextStyle> {
 
 abstract class Theming {
   static LinkTextStyle defaultLinkStyle = LinkTextStyle(
-    materialStyle: MaterialStateTextStyle.resolveWith((states) {
+    textStyle: MaterialStateTextStyle.resolveWith((states) {
       return GoogleFonts.rubik(
         fontSize: 16,
         fontWeight: FontWeight.w500,
@@ -67,4 +69,52 @@ abstract class Theming {
       );
     }),
   );
+
+  static PageBarItemStyle defaultMainButtonStyle =
+      PageBarItemStyle(textStyle: MaterialStateTextStyle.resolveWith((states) {
+    return GoogleFonts.rubik(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      color: (states.contains(MaterialState.hovered))
+          ? AppColors.mainButton
+          : AppColors.textH,
+    );
+  }), border: MaterialStateProperty.resolveWith((states) {
+    if (states.contains(MaterialState.selected)) {
+      return const Border(
+        bottom: BorderSide(
+          color: AppColors.mainButton,
+          width: 2.0,
+        ),
+      );
+    }
+    return const Border.fromBorderSide(BorderSide.none);
+  }));
+}
+
+class PageBarItemStyle extends ThemeExtension<PageBarItemStyle> {
+  final MaterialStateTextStyle textStyle;
+  final MaterialStateProperty<Border> border;
+
+  PageBarItemStyle({
+    required this.textStyle,
+    required this.border,
+  });
+
+  @override
+  ThemeExtension<PageBarItemStyle> copyWith({
+    MaterialStateTextStyle? textStyle,
+    MaterialStateProperty<Border>? border,
+  }) {
+    return PageBarItemStyle(
+      textStyle: textStyle ?? this.textStyle,
+      border: border ?? this.border,
+    );
+  }
+
+  @override
+  ThemeExtension<PageBarItemStyle> lerp(
+      covariant ThemeExtension<PageBarItemStyle>? other, double t) {
+    return this;
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:omega_app/widgets/page_bar.dart';
 
 import '../login_form.dart';
 
@@ -9,11 +10,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!kIsWeb) return LoginPage();
+    if (!kIsWeb) return const LoginPage();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 20,
               child: Text("Links"),
@@ -23,32 +24,37 @@ class LoginScreen extends StatelessWidget {
             backgroundColor: Colors.white,
             pinned: true,
             collapsedHeight: 80,
-            title: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: ColoredBox(
-                    color: Colors.red,
-                    child: Text("1"),
+            flexibleSpace: FlexibleSpaceBar(
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: PageBar(
+                      pages: [
+                        PageItem(text: "Игры"),
+                        PageItem(text: "Приложения"),
+                        PageItem(text: "Сообщество"),
+                        PageItem(text: "Турнир"),
+                        PageItem(text: "Справка"),
+                      ],
+                      onSelected: (value) {
+                        debugPrint("Selected menu item $value");
+                      },
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: ColoredBox(
-                    color: Colors.blue,
-                    child: Text("2"),
-                  ),
-                ),
-              ],
+                  const Spacer(),
+                ],
+              ),
             ),
           ),
           SliverToBoxAdapter(
               child: ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               maxHeight: 880,
             ),
-            child: LoginPageWeb(),
+            child: const LoginPageWeb(),
           )),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: SizedBox(
               height: 400,
               child: ColoredBox(color: Colors.black),
@@ -110,8 +116,8 @@ class LoginPageWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const DecoratedBox(
+    return const Scaffold(
+      body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/background.png"),
@@ -145,10 +151,10 @@ class _LoginForm extends StatelessWidget {
       alignment: Alignment.center,
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: LoginForm(
             onLogin: () => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("login actions")),
+              const SnackBar(content: Text("login actions")),
             ),
           ),
         ),

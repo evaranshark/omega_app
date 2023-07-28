@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Color violetHard = Color.fromARGB(255, 125, 110, 233);
-const Color violetLight = Color.fromARGB(255, 170, 158, 255);
-
 abstract class AppColors {
   static const Color violetHard = Color.fromARGB(255, 125, 110, 233);
   static const Color violetLight = Color.fromARGB(255, 170, 158, 255);
@@ -12,6 +9,7 @@ abstract class AppColors {
   static const textH = Color.fromARGB(255, 11, 16, 35);
   static const Color link = Color.fromARGB(255, 240, 61, 75);
   static const Color linkHover = Color.fromARGB(255, 228, 7, 24);
+  static const Color mainButton = Color.fromARGB(255, 160, 74, 207);
 }
 
 abstract class Assets {

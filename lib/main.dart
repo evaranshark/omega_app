@@ -144,6 +144,15 @@ class MainApp extends StatelessWidget {
           return themeDataBase.textTheme.labelSmall!.copyWith(
             color: AppColors.violetLight,
           );
+        }), suffixIconColor: MaterialStateColor.resolveWith((states) {
+          var activeStates = [
+            MaterialState.hovered,
+            MaterialState.focused,
+          ];
+          if (activeStates.any(states.contains)) {
+            return AppColors.violetHard;
+          }
+          return AppColors.violetLight;
         })),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
@@ -162,6 +171,7 @@ class MainApp extends StatelessWidget {
         extensions: [
           Theming.defaultLinkStyle,
           Theming.defaultMainButtonStyle,
+          Theming.defaultOmegaIconButtonTheme,
         ],
       ),
       home: const LoginScreen(),

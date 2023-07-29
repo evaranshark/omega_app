@@ -90,6 +90,17 @@ abstract class Theming {
     }
     return const Border.fromBorderSide(BorderSide.none);
   }));
+
+  static OmegaIconButtonTheme defaultOmegaIconButtonTheme =
+      OmegaIconButtonTheme(
+    labelStyle: MaterialStateTextStyle.resolveWith((states) {
+      return GoogleFonts.rubik(
+        fontWeight: FontWeight.w500,
+        fontSize: 12.0,
+        color: AppColors.textH,
+      );
+    }),
+  );
 }
 
 class PageBarItemStyle extends ThemeExtension<PageBarItemStyle> {
@@ -115,6 +126,25 @@ class PageBarItemStyle extends ThemeExtension<PageBarItemStyle> {
   @override
   ThemeExtension<PageBarItemStyle> lerp(
       covariant ThemeExtension<PageBarItemStyle>? other, double t) {
+    return this;
+  }
+}
+
+class OmegaIconButtonTheme extends ThemeExtension<OmegaIconButtonTheme> {
+  final MaterialStateTextStyle labelStyle;
+
+  OmegaIconButtonTheme({
+    required this.labelStyle,
+  });
+
+  @override
+  ThemeExtension<OmegaIconButtonTheme> copyWith() {
+    return this;
+  }
+
+  @override
+  ThemeExtension<OmegaIconButtonTheme> lerp(
+      covariant ThemeExtension<OmegaIconButtonTheme>? other, double t) {
     return this;
   }
 }

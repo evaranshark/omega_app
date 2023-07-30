@@ -10,8 +10,8 @@ import 'package:omega_app/helpers.dart';
 import 'package:omega_app/repository/login_repo.dart';
 import 'package:omega_app/widgets/omega_text_button.dart';
 
-import 'widgets/link_text.dart';
-import 'widgets/omega_form_field.dart';
+import 'link_text.dart';
+import 'omega_form_field.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({

@@ -10,7 +10,9 @@ abstract class AppColors {
   static const Color link = Color.fromARGB(255, 240, 61, 75);
   static const Color linkHover = Color.fromARGB(255, 228, 7, 24);
   static const Color mainButton = Color.fromARGB(255, 160, 74, 207);
-  static const Color footer = Color.fromARGB(255, 42, 8, 61);
+  static const Color footerBg = Color.fromARGB(255, 42, 8, 61);
+  static const Color cardBg = Color.fromARGB(255, 233, 238, 255);
+  static const Color footerHeader = Colors.white;
 }
 
 abstract class Assets {

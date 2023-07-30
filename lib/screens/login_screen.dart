@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:omega_app/constants.dart';
+import 'package:omega_app/themes.dart';
+import 'package:omega_app/widgets/link_text.dart';
 import 'package:omega_app/widgets/page_bar.dart';
 
 import '../login_form.dart';
@@ -17,12 +19,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20,
-              child: Text("Links"),
-            ),
-          ),
+          const OmegaLinksLine(),
           // Probably needs to be adapted for small screen sizes.
           // UI design not provided
           const OmegaToolbar(),
@@ -45,6 +42,61 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+class OmegaLinksLine extends StatelessWidget {
+  const OmegaLinksLine({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    var linkStyle = Theming.defaultHeaderLinkStyle;
+    return Theme(
+      data: Theme.of(context).copyWith(
+        extensions: [linkStyle],
+      ),
+      child: SliverToBoxAdapter(
+        child: SizedBox(
+          height: 20,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 1150,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    LinkText(
+                      text: "Для вас",
+                      onPressed: () {},
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    LinkText(
+                      text: "Для бизнеса",
+                      onPressed: () {},
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    LinkText(
+                      text: "Для разработчиков",
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class OmegaToolbar extends StatelessWidget {
   const OmegaToolbar({
     super.key,
@@ -58,64 +110,64 @@ class OmegaToolbar extends StatelessWidget {
       pinned: true,
       collapsedHeight: 80,
       flexibleSpace: Center(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(
-              flex: 2,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: SvgPicture.asset(Assets.logo),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: PageBar(
-                pages: [
-                  PageItem(text: "Игры"),
-                  PageItem(text: "Приложения"),
-                  PageItem(text: "Сообщество"),
-                  PageItem(text: "Турнир"),
-                  PageItem(text: "Справка"),
-                ],
-                onSelected: (value) {
-                  debugPrint("Selected menu item $value");
-                },
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 1150,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: SvgPicture.asset(Assets.logo),
               ),
-            ),
-            const Spacer(),
-            Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 320,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: PageBar(
+                  pages: [
+                    PageItem(text: "Игры"),
+                    PageItem(text: "Приложения"),
+                    PageItem(text: "Сообщество"),
+                    PageItem(text: "Турнир"),
+                    PageItem(text: "Справка"),
+                  ],
+                  onSelected: (value) {
+                    debugPrint("Selected menu item $value");
+                  },
                 ),
-                child: const OmegaSearchField(),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  OmegaIconButton(
-                    svgAsset: Assets.cart,
+              const Spacer(),
+              Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 320,
                   ),
-                  OmegaIconButton(
-                    svgAsset: Assets.favorite,
-                  ),
-                  OmegaIconButton(
-                    svgAsset: Assets.login,
-                    label: "Вход",
-                  ),
-                ],
+                  child: const OmegaSearchField(),
+                ),
               ),
-            ),
-            const Spacer(
-              flex: 2,
-            ),
-          ],
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    OmegaIconButton(
+                      svgAsset: Assets.cart,
+                    ),
+                    OmegaIconButton(
+                      svgAsset: Assets.favorite,
+                    ),
+                    OmegaIconButton(
+                      svgAsset: Assets.login,
+                      label: "Вход",
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

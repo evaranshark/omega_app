@@ -27,7 +27,7 @@ class OmegaIconButton extends StatelessWidget {
     this.style,
     this.icon,
     this.svgAsset,
-  }) : assert(iconWidget == null && icon == null && svgAsset == null,
+  }) : assert(iconWidget != null || icon != null || svgAsset != null,
             "Either icon, iconWidget or svgAsset must be provided.");
 
   @override
@@ -41,7 +41,19 @@ class OmegaIconButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(7.5),
           child: (label == null)
-              ? iconWidget
+              ? Builder(
+                  builder: (context) {
+                    if (iconWidget != null) {
+                      return iconWidget!;
+                    }
+                    if (svgAsset != null) {
+                      return SvgPicture.asset(
+                        svgAsset!,
+                      );
+                    }
+                    return Icon(icon!);
+                  },
+                )
               : Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

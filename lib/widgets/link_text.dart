@@ -20,6 +20,7 @@ class _LinkTextState extends State<LinkText> with MaterialStateMixin {
   Widget build(BuildContext context) {
     setMaterialState(MaterialState.disabled, widget.onPressed == null);
     return InkWell(
+      hoverColor: Colors.transparent,
       onTap: widget.onPressed,
       onHover: updateMaterialState(MaterialState.hovered),
       child: Text(

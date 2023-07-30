@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:omega_app/constants.dart';
-import 'package:omega_app/themes.dart';
 import 'package:omega_app/widgets/page_bar.dart';
 
 import '../login_form.dart';
+import '../widgets/omega_icon_button.dart';
+import '../widgets/omega_search_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -23,6 +23,8 @@ class LoginScreen extends StatelessWidget {
               child: Text("Links"),
             ),
           ),
+          // Probably needs to be adapted for small screen sizes.
+          // UI design not provided
           const OmegaToolbar(),
           SliverToBoxAdapter(
               child: ConstrainedBox(
@@ -88,15 +90,7 @@ class OmegaToolbar extends StatelessWidget {
                 constraints: const BoxConstraints(
                   maxWidth: 320,
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    labelText: "Поиск",
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                    suffixIcon: Icon(
-                      Icons.search,
-                    ),
-                  ),
-                ),
+                child: const OmegaSearchField(),
               ),
             ),
             Padding(
@@ -106,13 +100,13 @@ class OmegaToolbar extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   OmegaIconButton(
-                    icon: SvgPicture.asset(Assets.cart),
+                    svgAsset: Assets.cart,
                   ),
                   OmegaIconButton(
-                    icon: SvgPicture.asset(Assets.favorite),
+                    svgAsset: Assets.favorite,
                   ),
                   OmegaIconButton(
-                    icon: SvgPicture.asset(Assets.login),
+                    svgAsset: Assets.login,
                     label: "Вход",
                   ),
                 ],
@@ -122,51 +116,6 @@ class OmegaToolbar extends StatelessWidget {
               flex: 2,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class OmegaIconButton extends StatelessWidget {
-  final Widget icon;
-  final String? label;
-  final TextStyle? style;
-  const OmegaIconButton({
-    super.key,
-    required this.icon,
-    this.label,
-    this.style,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      clipBehavior: Clip.hardEdge,
-      child: InkWell(
-        onTap: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(7.5),
-          child: (label == null)
-              ? icon
-              : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    icon,
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    Text(
-                      label!,
-                      style: style ??
-                          Theme.of(context)
-                              .extension<OmegaIconButtonTheme>()!
-                              .labelStyle,
-                    ),
-                  ],
-                ),
         ),
       ),
     );

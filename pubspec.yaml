@@ -35,3 +35,8 @@ flutter:
     - assets/images/login.svg
     - assets/images/cart.svg
     - assets/images/favorite.svg
+    - assets/images/footer_logo.png
+    - assets/images/download.png
+    - assets/images/social_vk.svg
+    - assets/images/social_tg.svg
+    - assets/images/social_yt.svg

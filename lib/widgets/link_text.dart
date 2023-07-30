@@ -5,10 +5,12 @@ import '../themes.dart';
 class LinkText extends StatefulWidget {
   final String text;
   final VoidCallback? onPressed;
+  final int? maxLines;
   const LinkText({
     super.key,
     required this.text,
     this.onPressed,
+    this.maxLines = 1,
   });
 
   @override
@@ -25,6 +27,7 @@ class _LinkTextState extends State<LinkText> with MaterialStateMixin {
       onHover: updateMaterialState(MaterialState.hovered),
       child: Text(
         widget.text,
+        maxLines: widget.maxLines,
         style: Theme.of(context)
             .extension<LinkTextStyle>()!
             .textStyle

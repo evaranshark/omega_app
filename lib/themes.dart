@@ -24,6 +24,72 @@ class LinkTextStyle extends ThemeExtension<LinkTextStyle> {
 }
 
 abstract class Theming {
+  static ElevatedButtonThemeData footerElevatedButtonTheme =
+      ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateColor.resolveWith((states) {
+        return Colors.white;
+      }),
+      foregroundColor: MaterialStateColor.resolveWith((states) {
+        return AppColors.textH;
+      }),
+      shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+      textStyle: MaterialStatePropertyAll(GoogleFonts.rubik(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.48,
+      )),
+      padding: const MaterialStatePropertyAll(
+        EdgeInsets.symmetric(
+          vertical: 13,
+          horizontal: 9,
+        ),
+      ),
+      minimumSize: const MaterialStatePropertyAll<Size>(Size(42, 42)),
+      shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+      visualDensity: VisualDensity.standard,
+    ),
+  );
+
+  static ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateColor.resolveWith((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return const Color.fromARGB(255, 240, 238, 255);
+        }
+        if (states.contains(MaterialState.hovered)) {
+          return const Color.fromARGB(255, 134, 27, 192);
+        }
+        if (states.contains(MaterialState.pressed)) {
+          return const Color.fromARGB(255, 160, 74, 207);
+        }
+        return const Color.fromARGB(255, 160, 74, 207);
+      }),
+      foregroundColor: MaterialStateColor.resolveWith((states) {
+        return states.contains(MaterialState.disabled)
+            ? AppColors.violetHard
+            : Colors.white;
+      }),
+      shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+      textStyle: MaterialStatePropertyAll(GoogleFonts.rubik(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 1.03,
+      )),
+      padding: const MaterialStatePropertyAll(
+        EdgeInsets.symmetric(
+          vertical: 13,
+          horizontal: 35,
+        ),
+      ),
+      minimumSize: const MaterialStatePropertyAll<Size>(Size(50, 50)),
+      shape: MaterialStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+      visualDensity: VisualDensity.standard,
+    ),
+  );
+
   static LinkTextStyle defaultLinkStyle = LinkTextStyle(
     textStyle: MaterialStateTextStyle.resolveWith((states) {
       return GoogleFonts.rubik(

@@ -25,4 +25,9 @@ abstract class Assets {
   static const login = "assets/images/login.svg";
   static const cart = "assets/images/cart.svg";
   static const favorite = "assets/images/favorite.svg";
+  static const footerLogo = "assets/images/footer_logo.png";
+  static const download = "assets/images/download.png";
+  static const socialVk = "assets/images/social_vk.svg";
+  static const socialTg = "assets/images/social_tg.svg";
+  static const socialYt = "assets/images/social_yt.svg";
 }

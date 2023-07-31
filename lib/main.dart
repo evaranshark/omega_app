@@ -43,6 +43,9 @@ class MainApp extends StatelessWidget {
           primary: Color.fromARGB(255, 170, 158, 255),
         ),
         elevatedButtonTheme: Theming.elevatedButtonTheme,
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: AppColors.textP,
+        ),
         inputDecorationTheme: InputDecorationTheme(
             border: MaterialStateOutlineInputBorder.resolveWith((states) {
           var activeStates = [

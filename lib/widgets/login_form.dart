@@ -30,6 +30,8 @@ class _LoginFormState extends State<LoginForm> {
   final repo = LoginRepository();
   void onPressed() async {
     if (_formKey.currentState!.validate()) {
+      // Repository call should be moved to BLoC level.
+      // No need for small project
       bool logged = await repo.login(LoginData(
         emailController.text,
         passwordController.text,

@@ -40,25 +40,31 @@ class LoginPageWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: DecoratedBox(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background.png"),
-            fit: BoxFit.cover,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/background.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-        child: Row(
-          children: [
-            Spacer(
-              flex: 1,
+          Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 1160,
+              ),
+              child: Row(
+                children: [
+                  _LoginForm(),
+                ],
+              ),
             ),
-            _LoginForm(),
-            Spacer(
-              flex: 7,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

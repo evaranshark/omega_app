@@ -21,7 +21,7 @@ class OmegaLinksLine extends StatelessWidget {
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(
-                maxWidth: 1150,
+                maxWidth: 1160,
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),

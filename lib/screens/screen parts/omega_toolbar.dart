@@ -21,7 +21,7 @@ class OmegaToolbar extends StatelessWidget {
       flexibleSpace: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
-            maxWidth: 1150,
+            maxWidth: 1160,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,

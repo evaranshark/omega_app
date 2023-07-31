@@ -52,8 +52,8 @@ class Footer extends StatelessWidget {
           color: AppColors.footerBg,
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 140,
               vertical: 80,
+              horizontal: 20,
             ),
             child: Center(
               child: ConstrainedBox(
@@ -115,6 +115,7 @@ class _FooterLinksArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisSize: MainAxisSize.min,

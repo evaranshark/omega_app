@@ -9,12 +9,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!kIsWeb) return const LoginPage();
-    return OmegaWebPage(
-      body: ConstrainedBox(
-        constraints: const BoxConstraints(
-          maxHeight: 880,
-        ),
-        child: const LoginPageWeb(),
+    return const OmegaWebPage(
+      body: AspectRatio(
+        aspectRatio: 2460 / 1380,
+        child: LoginPageWeb(),
       ),
     );
   }
